@@ -1113,4 +1113,19 @@ public class SunmiInnerPrinterModule extends ReactContextBaseJavaModule {
             }
         });
     }
+    
+    @ReactMethod
+    public void updatePrinterState(final Promise p) {
+        try {
+            p.resolve(updatePrinterState());
+        } catch (Exception e) {
+            Log.i(TAG, "ERROR: " + e.getMessage());
+            p.reject("" + 0, e.getMessage());
+        }
+    }
+
+    private int updatePrinterState() throws Exception {
+        final IWoyouService printerService = woyouService;
+        return printerService.updatePrinterState();
+    }
 }
